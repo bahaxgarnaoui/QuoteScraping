@@ -1,7 +1,11 @@
 import google.generativeai as genai
 import time
-genai.configure(api_key="AIzaSyAaTvlqLBWwWqSaK0STAx_bByxt_fS0H_c")
+import os
+api_key = os.getenv("GEMINI_API_KEY")
 
+if api_key is None:
+    raise ValueError("API key not found. Set the GOOGLE_GENAI_API_KEY environment variable.")
+genai.configure(api_key=api_key) 
 generation_config = {
   "temperature": 1,
   "top_p": 0.95,
